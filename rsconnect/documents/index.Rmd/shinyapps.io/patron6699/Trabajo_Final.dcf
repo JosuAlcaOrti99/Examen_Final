@@ -5,9 +5,9 @@ account: patron6699
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6705001
-bundleId: 6140555
+bundleId: 6141139
 url: https://patron6699.shinyapps.io/Trabajo_Final/
-when: 1658977669.10984
-lastSyncTime: 1658977669.10985
+when: 1658993246.53965
+lastSyncTime: 1658993246.53966
 asMultiple: FALSE
 asStatic: FALSE

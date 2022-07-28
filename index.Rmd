@@ -89,8 +89,8 @@ Ed_deli  <-
   c("Todas", Ed_deli )
 ```
 
-
-{.sidebar}
+## Trabajo Final Estadisticas policiales 2021
+Trabajo Final Estadisticas policiales 2021 {.sidebar}
 ========================================
 
 
@@ -163,6 +163,7 @@ filtrardistritos <- reactive({
      filter(Edad == input$edad)
  }
   return(datos_filtrados)
+ 
 })
 ```
 
@@ -170,7 +171,7 @@ filtrardistritos <- reactive({
 
 -----------------------------------------------------------------------
 
-### ### **Fuente de los datos: [Instituto Geográfico Nacional (IGN)](https://www.snitcr.go.cr/ico_servicios_ogc_info?k=bm9kbzo6MjY=&nombre=IGN%20Cartograf%C3%ADa%201:5mil)**
+### **Fuente de los datos: [Instituto Geográfico Nacional (IGN)](https://www.snitcr.go.cr/ico_servicios_ogc_info?k=bm9kbzo6MjY=&nombre=IGN%20Cartograf%C3%ADa%201:5mil)**, **[Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
 # Normalización de los nombres de distritos
@@ -394,7 +395,7 @@ colores_distritos_delitos <-
 
 ```{r}
 
-renderLeaflet({
+renderLeaflet ({
   Datos_Policiales <- filtrardistritos()
   
 # Mapa leaflet de delitos en distritos
@@ -449,7 +450,7 @@ leaflet() %>%
 
 # Seccion 2
 
-### Chart B
+### **Fuente de los datos: [Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 
 ```{r}
 renderDT({
@@ -473,7 +474,7 @@ Datos_Policiales %>%
 Columns 
 -----------------------------------------------------------------------
 
-### Delitos por tipo de delito
+### **Fuente de los datos:[Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 
 
 ```{r graficos, echo=FALSE, results='hide',message=FALSE}
@@ -504,7 +505,7 @@ ggplotly(Grafico_barras_delixprov) %>% config(locale = 'es')
 ```
 
 
-### Delitos por victima
+### **Fuente de los datos: [Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 ```{r, echo=FALSE, results='hide',message=FALSE}
 delitos_x_victima <-
   Datos_Policiales %>%
@@ -536,7 +537,7 @@ ggplotly(Grafico_barras_delixvictim) %>% config(locale = 'es')
 Columns 
 -----------------------------------------------------------------------
 
-### Delitos por mes
+### **Fuente de los datos: [Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
 delitos_x_fecha <-
@@ -560,7 +561,9 @@ Datos_Policiales %>%
 ```
 
 ```{r, echo=FALSE, message=FALSE}
+
 renderPlotly({
+  
   Datos_Policiales <- filtrardistritos()
   
 Grafico_barras_delixficha <-
@@ -578,7 +581,7 @@ ggplotly(Grafico_barras_delixficha) %>% config(locale = 'es')
 })
 ```
 
-### Delitos por genero 
+### **Fuente de los datos: [Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -586,7 +589,7 @@ delitos_x_genero <-
   Datos_Policiales %>% 
   count(Genero, name = "Cantidad de delitos por genero")
 
-renderPlotly({
+renderPlotly ({
   Datos_Policiales <- filtrardistritos()
 
 barras_apiladas_cantidad <-
@@ -594,8 +597,8 @@ barras_apiladas_cantidad <-
   ggplot(aes(x = Delito , fill = Genero)) +
   geom_bar( position = "fill" ) +
   ggtitle("Porcentaje de delitos por genero") +
-  xlab("cantidad") +
-  ylab("Tipo de delito") +
+  xlab("Tipo de delito") +
+  ylab("Cantidad") +
   labs(fill = "Genero") +
   coord_flip() + 
   theme_minimal()
@@ -609,7 +612,7 @@ ggplotly(barras_apiladas_cantidad) %>% config(locale = 'es')
 # Seccion 4
 
 
-### Grafico cantida de delitos por edad
+### **Fuente de los datos: [Pagina web de datos abiertos del OIJ](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)**
 ```{r,echo=FALSE, results='hide',message=FALSE}
 delitos_x_edad <-
   Datos_Policiales %>%
