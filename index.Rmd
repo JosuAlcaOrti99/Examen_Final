@@ -243,7 +243,7 @@ Datos_Policiales %>%
 
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
-Datos_Policiales <-
+Datos_Policiales_normalizados <-
   Datos_Policiales %>%
   left_join(
     dplyr::select(
@@ -260,7 +260,7 @@ Datos_Policiales <-
 
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
-Datos_Policiales %>%
+Datos_Policiales_normalizados %>%
   left_join(
     dplyr::select(st_drop_geometry(distritos),
                   codigo_dta, 
@@ -278,8 +278,8 @@ Datos_Policiales %>%
 ```
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
-Datos_Policiales <-
-  Datos_Policiales %>%
+Datos_Policiales_normalizados <-
+  Datos_Policiales_normalizados %>%
   mutate(Distrito = if_else(cod_canton == 703 & Distrito == "CAIRO", "EL CAIRO", Distrito)) %>%
   mutate(Distrito = if_else(cod_canton == 210 & Distrito == "FORTUNA", "LA FORTUNA", Distrito)) %>%
   mutate(Distrito = if_else(cod_canton == 410 & Distrito == "HORQUETAS", "LAS HORQUETAS", Distrito)) %>%
@@ -313,12 +313,12 @@ Datos_Policiales <-
   mutate(Distrito = if_else(cod_canton == 211 & Distrito == "TAPEZCO", "TAPESCO", Distrito))
   
 # Se realiza nuevamente esta operación para reflejar los cambios en los nombres de distritos
-Datos_Policiales <-
-  Datos_Policiales %>%
+Datos_Policiales_normalizados <-
+  Datos_Policiales_normalizados %>%
   mutate(distrito_normalizado = tolower(stri_trans_general(Distrito, id = "Latin-ASCII")))
 
 # Revisión
-Datos_Policiales %>%
+Datos_Policiales_normalizados %>%
   left_join(
     dplyr::select(st_drop_geometry(distritos),
                   codigo_dta, 
@@ -338,8 +338,8 @@ Datos_Policiales %>%
 
 ```{r,echo=FALSE, results='hide',message=FALSE}
 # Unión del código de distrito a delitos
-Datos_Policiales <-
-  Datos_Policiales %>%
+Datos_Policiales_normalizados <-
+  Datos_Policiales_normalizados %>%
   left_join(
     dplyr::select(
       st_drop_geometry(distritos),
@@ -358,7 +358,7 @@ Datos_Policiales <-
 ```{r,echo=FALSE, results='hide',message=FALSE}
 # Conteo de delitos por código de distrito
 delitos_x_distrito <-
-  Datos_Policiales %>%
+  Datos_Policiales_normalizados %>%
   count(codigo_dta, name = "delitos")
 
 # Unión de cantidad de delitos por distrito a distritos
